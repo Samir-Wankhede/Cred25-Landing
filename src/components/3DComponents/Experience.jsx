@@ -61,13 +61,13 @@ function DragonCameraController({ mountDragon, boneRef, setAnimationIndex, origi
 //     }
 //   });
 
-  return <OrbitControls enableZoom={true} minDistance={5}/>;
+  return <OrbitControls enableZoom={true}/>;
 }
 
 function Experience({ mountDragon, explore3D, setMountDragon }) {
   const boneRef = useRef();
   const firstRender = useRef(true);
-  const originalPositionRef = useRef(new THREE.Vector3(0, 0, 5)); // Store the original camera position
+  const originalPositionRef = useRef(new THREE.Vector3(-2.5, 0.25, 4.5)); // Store the original camera position
   const [animationIndex, setAnimationIndex] = useState(7);
   const [forceAnimationUseStateTrigger, setForceAnimationUseStateTrigger] = useState(false);
 //   const validAnimations = [7];
