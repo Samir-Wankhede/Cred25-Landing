@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { act, useEffect, useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
@@ -14,7 +14,8 @@ const Dragon = ({ boneRef, animationIndex, onAnimationEnd, firstRender, forceAni
       mixer.current = new THREE.AnimationMixer(scene);
       const action = mixer.current.clipAction(animations[animationIndex]);
       action.reset()
-      action.time = 64;
+      action.time = 62;
+      // action.time = 64; //for front view
       action.play();
       action.setLoop(THREE.LoopOnce); // Play the animation once
     }
