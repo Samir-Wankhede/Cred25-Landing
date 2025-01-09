@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Avenixel";
+  src: url(../fonts/Avenixel-Regular.ttf);
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+html,body {
+  height: 100vh;
+  width: 100vw;
+  /* background-color: #181818; */
+  font-family: "Avenixel", sans-serif;
+  overflow: hidden;
+  background-image: url('./pixel-bg1.jpg'); /* Replace with your background image path */
+  background-size: cover; /* Ensure the image covers the entire viewport */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  position: relative; /* Ensure the positioning of HTML content */
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.custom-outline1 {
+  -webkit-text-stroke: 2px #101e34; /* Outline */
+color: #fff3d4; /* Text fill */
+font-weight: bold; /* Adjust thickness for better visibility */
+}
+
+.custom-shadow1 {
+  text-shadow: 1px 10px 0px #101e34;
+}
+
+.custom-outline2 {
+  -webkit-text-stroke: 2px #101e34; /* Outline */
+color: #fff3d4; /* Text fill */
+}
+
+.custom-shadow2 {
+  text-shadow: 2px 4px 0px #101e34;
+}
+
+
+
+.custom-shadow-event {
+  text-shadow: 1px 3px 0px #101e34;
+}
+
+
+.layout{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 100;
+  background-color: transparent;
+}
