@@ -1,4 +1,4 @@
-import { Canvas, useThree } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import Dragon from './dragon/dragon';
 import { Suspense, useEffect, useRef, useState } from 'react';
@@ -154,10 +154,10 @@ function Experience({ mountDragon, explore3D, setMountDragon }) {
 
   return (
     <Canvas className="bg-black"
-      camera={{ position: startPositionRef.current, near: 0.01 } 
+      camera={{ position: startPositionRef.current, near: 0.01 } }
       onCreated={({ scene }) => {
         scene.fog = new THREE.Fog('black', 5, 20) 
-      }}}
+      }}
 
     >
       <ambientLight intensity={10} />
