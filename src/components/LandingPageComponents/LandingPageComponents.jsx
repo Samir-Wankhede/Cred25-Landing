@@ -11,41 +11,15 @@ const LandingPageComponents = ({ setExplore3D, setMountDragon, mountDragon, expl
 
   const activeToggle = explore3D ? 'explore3D' : mountDragon ? 'dragonMount' : null;
   return (
-    <div className='w-full h-full flex flex-col items-center justify-between'>
-      <div className='flex-grow'></div>
-      <svg viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg" className={`w-full h-auto transition-all duration-1000 ${activeToggle ? 'scale-150 opacity-0' : 'scale-100 opacity-100'}`}>
-        <text x="45.5%" y="30%" dominantBaseline="middle" textAnchor="middle" 
-            fontSize="40" 
-            fill="#fff3d4" 
-            stroke="#101e34" 
-            strokeWidth="3" 
-            paintOrder="stroke fill"
-            className="custom-shadow2"
-            >
-        CREDENZ
-        </text>
-        <text x="64%" y="30%" dominantBaseline="middle" textAnchor="middle" 
-            fontSize="40" 
-            fill="#fff3d4" 
-            stroke="#101e34" 
-            strokeWidth="3" 
-            paintOrder="stroke fill"
-            className="custom-shadow2"
-            >
-        '25
-        </text>
-
-        <text x="50%" y="52%" dominantBaseline="middle" textAnchor="middle" 
-            fontSize="10" 
-            fill="#fff3d4" 
-            stroke="#101e34" 
-            strokeWidth="2" 
-            paintOrder="stroke fill"
-            className="custom-shadow2"
-            >
-        Pixelating Realms
-        </text>
-      </svg>
+    <div className='w-screen h-screen flex flex-col items-center justify-between py-20'>
+      {/* <div className='flex-grow'></div> */}
+      <div className={` items-center w-screen flex flex-col h-auto transition-all duration-1000 ${activeToggle ? 'scale-150 opacity-0' : 'scale-100 opacity-100'}`}>
+        <div className='flex gap-1'>
+          <p className='custom-shadow2 text-7xl md:text-9xl text-[#fff3d4]'> CREDENZ </p>
+          <p className='custom-shadow2 text-7xl md:text-9xl text-[#fff3d4]'> '25 </p>
+        </div>
+        <p className='custom-shadow2 -mt-4 text-3xl md:text-4xl text-[#fff3d4]'> Pixelating Realms </p>
+      </div>
       <div className="flex gap-5 space-x-4 mb-8 flex-grow items-end">
         <div className={` pointer-events-auto transition-all duration-1000 ${activeToggle && activeToggle !== 'explore3D' ? 'scale-150 opacity-0 invisible' : 'scale-100 opacity-100 visible'}`}>
           <div className="flex flex-col justify-center items-center space-x-2">
