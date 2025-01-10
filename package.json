@@ -12,8 +12,10 @@
   "dependencies": {
     "@react-three/drei": "^9.120.6",
     "@react-three/fiber": "^8.17.12",
+    "@react-three/postprocessing": "^2.16.6",
     "gsap": "^3.12.5",
     "leva": "^0.9.35",
+    "nice-color-palettes": "^4.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.1.1",

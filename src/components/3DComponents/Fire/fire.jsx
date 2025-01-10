@@ -3,13 +3,13 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 const FireParticles = ({
-  position = [0, -2, 0],
+  position = [0, -1.5, 0],
   planeWidth = 25,
   planeHeight = 25,
   particleCount = 500,
   particleSize = 0.07,
   height = 20,
-  speed = 0.12, // New speed control prop
+  speed = 0.12, 
 }) => {
   const particles = useRef();
   
@@ -29,16 +29,14 @@ const FireParticles = ({
       positions[i * 3 + 1] = 0;
       positions[i * 3 + 2] = z;
       
-      // Velocities scaled by height and speed
       velocities[i * 3] = (Math.random() - 0.5) * 0.003 * height * speed;
       velocities[i * 3 + 1] = (Math.random() * 0.005 + 0.005) * height * speed;
       velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.003 * height * speed;
       
-      // Color - warmer, more fire-like colors
       const mixed = Math.random();
       colors[i * 3] = 1; // Red
-      colors[i * 3 + 1] = mixed * 0.7; // More orange
-      colors[i * 3 + 2] = mixed * 0.1; // Slight blue
+      colors[i * 3 + 1] = mixed * 0.8; // More orange
+      colors[i * 3 + 2] = mixed * 0.6; // Slight blue
       
       opacities[i] = Math.random() * 0.5 + 0.5;
       lifetimes[i] = Math.random();
