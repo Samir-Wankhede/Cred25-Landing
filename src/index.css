@@ -60,3 +60,9 @@ color: #fff3d4; /* Text fill */
   z-index: 100;
   background-color: transparent;
 }
+
+@media (min-width: 768px) {
+  .md\:custom-shadow1 {
+    text-shadow: 1px 10px 0px #101e34;
+  }
+}
