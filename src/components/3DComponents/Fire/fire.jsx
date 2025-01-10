@@ -1,5 +1,5 @@
 import React, { useRef, useMemo } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useLoader } from '@react-three/fiber';
 import * as THREE from 'three';
 
 const FireParticles = ({
@@ -7,12 +7,13 @@ const FireParticles = ({
   planeWidth = 25,
   planeHeight = 25,
   particleCount = 600,
-  particleSize = 0.07,
+  particleSize = 0.35,
   height = 20,
   speed = 0.12, 
 }) => {
+   
   const particles = useRef();
-  
+  const fireTexture = useLoader(THREE.TextureLoader, "flame2.png")
   const [positions, colors, velocities, opacities, lifetimes] = useMemo(() => {
     const positions = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);
@@ -35,8 +36,8 @@ const FireParticles = ({
       
       const mixed = Math.random();
       colors[i * 3] = 1; // Red
-      colors[i * 3 + 1] = mixed * 0.8; // More orange
-      colors[i * 3 + 2] = mixed * 0.6; // Slight blue
+      colors[i * 3 + 1] = mixed * 0.7; // More orange
+      colors[i * 3 + 2] = mixed * 0.4; // Slight blue
       
       opacities[i] = Math.random() * 0.5 + 0.5;
       lifetimes[i] = Math.random();
@@ -61,7 +62,7 @@ const FireParticles = ({
       // Calculate height-based opacity
       const currentHeight = positions[i * 3 + 1];
       const fadeStart = height * 0.3;
-      const fadeEnd = height * 0.8;
+      const fadeEnd = height*0.8;
       let heightFade = 1;
       
       if (currentHeight > fadeStart) {
@@ -119,6 +120,7 @@ const FireParticles = ({
           depthWrite={false}
           blending={THREE.AdditiveBlending}
           sizeAttenuation
+          map={fireTexture}
         />
       </points>
     </group>
