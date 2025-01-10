@@ -67,7 +67,6 @@ function DragonCameraController({ mountDragon, boneRef, setAnimationIndex, origi
 function CameraController({originalPositionRef, startPositionRef, explore3D}){
   const { camera } = useThree();
   const firstAnimation = useRef(false);
-  const previousPointer = useRef(new THREE.Vector2(0,0));
   useEffect(()=>{
     if(!explore3D){
       const originalPosition = originalPositionRef.current;
@@ -100,18 +99,13 @@ function CameraController({originalPositionRef, startPositionRef, explore3D}){
   useFrame((state)=>{
     if(
       !explore3D && 
-      firstAnimation.current && 
-      previousPointer.current.x!==state.pointer.x && 
-      previousPointer.current.y!==state.pointer.y &&
-      state.pointer.x < 0.6 && state.pointer.x > -0.6 &&
-      state.pointer.y < 0.8 && state.pointer.y > -0.8
+      firstAnimation.current
     ){
-      previousPointer.current.x = state.pointer.x;
-      previousPointer.current.y = state.pointer.y;
+      const originalPosition = originalPositionRef.current;
       gsap.to(camera.position, {
-        x: camera.position.x + state.pointer.x,
-        y: camera.position.y + state.pointer.y < 2 ? camera.position.y + state.pointer.y : camera.position.y,
-        z: camera.position.z,
+        x: originalPosition.x + state.pointer.x,
+        y: originalPosition.y + state.pointer.y,
+        z: originalPosition.z,
         duration: 1,
         onUpdate: () => {
           camera.lookAt(new THREE.Vector3(0, 0, 0));
