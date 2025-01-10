@@ -6,7 +6,7 @@ const FireParticles = ({
   position = [0, -1.5, 0],
   planeWidth = 25,
   planeHeight = 25,
-  particleCount = 600,
+  particleCount = 250,
   particleSize = 0.35,
   height = 20,
   speed = 0.12, 
@@ -24,10 +24,11 @@ const FireParticles = ({
     for (let i = 0; i < particleCount; i++) {
       // Position - start in a rectangular pattern matching plane size
       const x = (Math.random() - 0.5) * planeWidth;
+      const y = (Math.random() - 0.5) * height;
       const z = (Math.random() - 0.5) * planeHeight;
       
       positions[i * 3] = x;
-      positions[i * 3 + 1] = 0;
+      positions[i * 3 + 1] = y;
       positions[i * 3 + 2] = z;
       
       velocities[i * 3] = (Math.random() - 0.5) * 0.003 * height * speed;
