@@ -64,14 +64,81 @@ function DragonCameraController({ mountDragon, boneRef, setAnimationIndex, origi
   return <OrbitControls enableZoom={true}/>;
 }
 
+function CameraController({originalPositionRef, startPositionRef, explore3D}){
+  const { camera } = useThree();
+  const firstAnimation = useRef(false);
+  const previousPointer = useRef(new THREE.Vector2(0,0));
+  useEffect(()=>{
+    if(!explore3D){
+      const originalPosition = originalPositionRef.current;
+      gsap.to(camera.position, {
+        x: originalPosition.x,
+        y: originalPosition.y,
+        z: originalPosition.z,
+        duration: 1.5,
+        onUpdate: () => {
+          camera.lookAt(new THREE.Vector3(0, 0, 0));
+        },
+        onComplete: () => {
+          firstAnimation.current = true;
+        },
+      });
+    }else{
+      const originalPosition = startPositionRef.current;
+      gsap.to(camera.position, {
+        x: -originalPosition.x,
+        y: originalPosition.y,
+        z: originalPosition.z + 3,
+        duration: 1,
+        onUpdate: () => {
+          camera.lookAt(new THREE.Vector3(0, 0, 0));
+        },
+      });
+    }
+    
+  },[explore3D])
+  useFrame((state)=>{
+    if(
+      !explore3D && 
+      firstAnimation.current && 
+      previousPointer.current.x!==state.pointer.x && 
+      previousPointer.current.y!==state.pointer.y &&
+      state.pointer.x < 0.6 && state.pointer.x > -0.6 &&
+      state.pointer.y < 0.8 && state.pointer.y > -0.8
+    ){
+      previousPointer.current.x = state.pointer.x;
+      previousPointer.current.y = state.pointer.y;
+      gsap.to(camera.position, {
+        x: camera.position.x + state.pointer.x,
+        y: camera.position.y + state.pointer.y < 2 ? camera.position.y + state.pointer.y : camera.position.y,
+        z: camera.position.z,
+        duration: 1,
+        onUpdate: () => {
+          camera.lookAt(new THREE.Vector3(0, 0, 0));
+        },
+      });
+    }
+  })
+  return ( 
+    <OrbitControls 
+      enableRotate={explore3D? true : false} 
+      enablePan={false} 
+      enableZoom={explore3D ? true : false} 
+      minDistance={5} 
+      maxDistance={10} 
+      maxPolarAngle={Math.PI / 1.8}
+      minPolarAngle={Math.PI / 4}
+    />
+  )
+}
+
 function Experience({ mountDragon, explore3D, setMountDragon }) {
   const boneRef = useRef();
   const firstRender = useRef(true);
   const originalPositionRef = useRef(new THREE.Vector3(-1.5, 0.25, 7)); // Store the original camera position
-  // const originalPositionRef = useRef(new THREE.Vector3(-2.5, -0.25, 4.5)); // Store the original camera position
+  const startPositionRef = useRef(new THREE.Vector3(-2.5, 3, 4.5)); // Store the original camera position
   const [animationIndex, setAnimationIndex] = useState(7);
   const [forceAnimationUseStateTrigger, setForceAnimationUseStateTrigger] = useState(false);
-//   const validAnimations = [7];
   const validAnimations = [0,1,7,9,11,15,18,19];
 
   const onAnimationEnd = () => {
@@ -87,7 +154,7 @@ function Experience({ mountDragon, explore3D, setMountDragon }) {
 
   return (
     <Canvas className="bg-black"
-      camera={{ position: originalPositionRef.current, near: 0.01 }}
+      camera={{ position: startPositionRef.current, near: 0.01 }}
     >
       <ambientLight intensity={10} />
       <spotLight position={[0, 0, 10]} angle={0.15} penumbra={1} />
@@ -106,14 +173,23 @@ function Experience({ mountDragon, explore3D, setMountDragon }) {
       <Suspense fallback={null}>
         <Portal />
       </Suspense>
-      <DragonCameraController
-        mountDragon={mountDragon}
-        boneRef={boneRef}
-        setAnimationIndex={setAnimationIndex}
-        originalPositionRef={originalPositionRef}
-        animationIndex={animationIndex}
-      />
-      <OrbitControls enableRotate={false} enablePan={true} enableZoom={false} />
+      { !explore3D && mountDragon && 
+        <DragonCameraController
+          mountDragon={mountDragon}
+          boneRef={boneRef}
+          setAnimationIndex={setAnimationIndex}
+          originalPositionRef={originalPositionRef}
+          animationIndex={animationIndex}
+        />
+      }
+      {
+        !mountDragon &&
+        <CameraController
+          originalPositionRef={originalPositionRef}
+          startPositionRef={startPositionRef}
+          explore3D={explore3D}
+        />
+      }
       <axesHelper args={[5]} />
     </Canvas>
   );

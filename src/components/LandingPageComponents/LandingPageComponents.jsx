@@ -11,9 +11,9 @@ const LandingPageComponents = ({ setExplore3D, setMountDragon, mountDragon, expl
 
   const activeToggle = explore3D ? 'explore3D' : mountDragon ? 'dragonMount' : null;
   return (
-    <div className='w-screen h-screen flex flex-col items-center justify-between'>
+    <div className='w-screen h-screen flex flex-col items-center justify-between py-20'>
       {/* <div className='flex-grow'></div> */}
-      <div className={` items-center w-screen flex flex-col mt-20 h-auto transition-all duration-1000 ${activeToggle ? 'scale-150 opacity-0' : 'scale-100 opacity-100'}`}>
+      <div className={` items-center w-screen flex flex-col h-auto transition-all duration-1000 ${activeToggle ? 'scale-150 opacity-0' : 'scale-100 opacity-100'}`}>
         <div className='flex gap-1'>
           <p className='custom-shadow2 text-7xl md:text-9xl text-[#fff3d4]'> CREDENZ </p>
           <p className='custom-shadow2 text-7xl md:text-9xl text-[#fff3d4]'> '25 </p>
