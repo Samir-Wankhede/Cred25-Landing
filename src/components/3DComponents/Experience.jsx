@@ -150,7 +150,7 @@ function Experience({ mountDragon, explore3D, setMountDragon }) {
     <Canvas className="bg-black"
       camera={{ position: startPositionRef.current, near: 0.01 } }
       onCreated={({ scene }) => {
-        scene.fog = new THREE.Fog('black', 5, 20) 
+        scene.fog = new THREE.Fog('black', 5, 17) 
       }}
 
     >
