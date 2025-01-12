@@ -8,7 +8,11 @@ const generateFlareTexture = () => {
   canvas.width = size;
   canvas.height = size;
   const context = canvas.getContext('2d');
-  
+
+  // Clear the canvas
+  context.clearRect(0, 0, size, size);
+
+  // Create a radial gradient for a circular flare
   const gradient = context.createRadialGradient(
     size / 2,
     size / 2,
@@ -17,10 +21,10 @@ const generateFlareTexture = () => {
     size / 2,
     size / 2
   );
-  gradient.addColorStop(0, 'rgba(255, 200, 50, 1)');
-  gradient.addColorStop(0.2, 'rgba(255, 80, 20, 0.8)');
-  gradient.addColorStop(0.5, 'rgba(255, 20, 0, 0.5)');
-  gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+  // Simple gradient that fades from white to transparent
+  gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');  // White center
+  gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');  // Transparent edges
 
   context.fillStyle = gradient;
   context.fillRect(0, 0, size, size);
@@ -63,7 +67,7 @@ const FireParticles = ({
 
       const mixed = Math.random();
       colors[i * 3] = 1; // Red
-      colors[i * 3 + 1] = mixed * 0.7; // Orange
+      colors[i * 3 + 1] = mixed * 0.3; // Orange
       colors[i * 3 + 2] = mixed * 0.1; // Blue hint
 
       opacities[i] = Math.random() * 0.5 + 0.5;
