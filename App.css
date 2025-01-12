@@ -1,0 +1,99 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    height: 100%;
+  }
+  
+  /* App container that holds the canvas */
+  .app-container {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  /* Buttons */
+  button {
+    padding: 12px 24px;
+    font-size: 18px;
+    background-color: #ffb6c1; /* Light pink color */
+    color: black;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Adds shadow for button */
+    transition: all 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #f8a1b5; /* Slightly darker pink on hover */
+  }
+  
+  button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  
+  /* Explore Button */
+  .explore-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 180px;
+  }
+  
+  .portal-btn {
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    width: 180px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1200px) {
+    .explore-btn, .portal-btn {
+      font-size: 16px;
+      padding: 10px 20px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .explore-btn, .portal-btn {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+  
+    .explore-btn {
+      top: 10px;
+      left: 10px;
+    }
+  
+    .portal-btn {
+      top: 60px;
+      left: 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .explore-btn, .portal-btn {
+      font-size: 12px;
+      padding: 6px 12px;
+    }
+  
+    .explore-btn {
+      top: 5px;
+      left: 5px;
+    }
+  
+    .portal-btn {
+      top: 40px;
+      left: 5px;
+    }
+  }
+  
