@@ -4,7 +4,7 @@ import FireParticles from '../Fire/fire';
 import  { Galaxy } from './NetherPortalParticles';
 
 const Portal = () => {
-  const { scene } = useGLTF('/Portal.glb');
+  const { scene } = useGLTF('/Portal2.glb');
   const ref = useRef();
   return (
     <>
