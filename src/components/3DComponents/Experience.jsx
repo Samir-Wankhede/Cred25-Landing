@@ -26,8 +26,8 @@ function DragonCameraController({ mountDragon, boneRef, setAnimationIndex, origi
           camera.lookAt(bonePosition);
         },
         onComplete: () => {
-          if (animationIndex!==7) {
-            setAnimationIndex(7);
+          if (animationIndex!==2) {
+            setAnimationIndex(2);
             setForceAnimationUseStateTrigger(prev => !prev);
             firstRender.current = false;
           } 
@@ -129,17 +129,17 @@ function CameraController({originalPositionRef, startPositionRef, explore3D}){
 function Experience({ mountDragon, explore3D, setMountDragon }) {
   const boneRef = useRef();
   const firstRender = useRef(true);
-  const originalPositionRef = useRef(new THREE.Vector3(-1.5, 0.25, 7)); // Store the original camera position
+  const originalPositionRef = useRef(new THREE.Vector3(-2.5, 0.15, 7)); // Store the original camera position
   const startPositionRef = useRef(new THREE.Vector3(-2.5, 3, 4.5)); // Store the original camera position
-  const [animationIndex, setAnimationIndex] = useState(7);
+  const [animationIndex, setAnimationIndex] = useState(3);
   const [forceAnimationUseStateTrigger, setForceAnimationUseStateTrigger] = useState(false);
-  const validAnimations = [0,1,7,9,11,15,18,19];
 
   const onAnimationEnd = () => {
-    if(animationIndex===7 && mountDragon) {
+    if(animationIndex===2 && mountDragon) {
       setMountDragon(false);
     }
-    const curAnimation = validAnimations[Math.floor(Math.random() * validAnimations.length)];
+    // const curAnimation = Math.floor(Math.random() * 9);
+    const curAnimation = 0;
     setAnimationIndex(curAnimation);
     setForceAnimationUseStateTrigger(prev => !prev);
     firstRender.current = false;
@@ -154,11 +154,11 @@ function Experience({ mountDragon, explore3D, setMountDragon }) {
       }}
 
     >
-      <ambientLight intensity={10} />
+      <ambientLight intensity={1} />
       <spotLight position={[0, 0, 10]} angle={0.15} penumbra={1} />
-      <pointLight position={[10, 10, 10]} intensity={1000} />
-      <pointLight position={[10, 10, -10]} intensity={1000} />
-      <pointLight position={[-10, -10, -10]} intensity={1000} />
+      <pointLight position={[10, 10, 10]} intensity={100} color={'orange'} />
+      <pointLight position={[10, 10, -10]} intensity={100} color={'orange'} />
+      <pointLight position={[-10, -10, -10]} intensity={100} color={'orange'} />
       <Suspense fallback={null}>
         <Dragon 
             boneRef={boneRef} 
@@ -188,7 +188,7 @@ function Experience({ mountDragon, explore3D, setMountDragon }) {
           explore3D={explore3D}
         />
       }
-      <axesHelper args={[5]} />
+      {/* <axesHelper args={[5]} /> */}
     </Canvas>
   );
 }

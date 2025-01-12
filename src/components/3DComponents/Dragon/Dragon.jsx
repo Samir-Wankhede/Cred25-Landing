@@ -15,29 +15,30 @@ const Dragon = ({ boneRef, animationIndex, onAnimationEnd, firstRender, forceAni
       const action = mixer.current.clipAction(animations[animationIndex]);
       action.reset()
       action.time = 62;
-      // action.time = 64; //for front view
       action.play();
       action.setLoop(THREE.LoopOnce); // Play the animation once
+      action.clampWhenFinished = true;
     }
   }, [scene, animations, animationIndex]);
 
-  useEffect(()=>{
-    function handleAnimationEnd() {
-     console.log('Animation finished');
-     onAnimationEnd();
-    }
-    if(mixer.current){
-        mixer.current.addEventListener('finished', handleAnimationEnd);
-    }
-    return () => mixer.current.removeEventListener('finished', handleAnimationEnd);
-  },[mixer.current])
-
   useEffect(() => {
+    // Set up shadow casting and receiving
     scene.traverse((child) => {
       child.frustumCulled = false;
-      if(child.isBone) {
-        console.log(child.name);
+
+      if (child.isMesh) {
+        child.castShadow = true; // Enable shadow casting
+        child.receiveShadow = true; // Enable shadow receiving
+
+        // Optional: Configure material emissive properties
+        const material = child.material;
+        if (material && material.isMeshStandardMaterial) {
+          material.emissive = new THREE.Color('#ffffff');
+          material.emissiveIntensity = 0.01;
+        }
       }
+
+      // Store a reference to a specific bone
       if (child.isBone && child.name === 'Bip001-Neck_08') {
         boneRef.current = child;
       }
@@ -49,7 +50,7 @@ const Dragon = ({ boneRef, animationIndex, onAnimationEnd, firstRender, forceAni
         mixer.current.stopAllAction();
         const action = mixer.current.clipAction(animations[animationIndex]);
         action.reset()
-        if(animationIndex==7){
+        if(animationIndex==2 || animationIndex==2){
             action.time = 30;
         } else if(animationIndex==1){
             action.time = 5;
@@ -68,6 +69,7 @@ const Dragon = ({ boneRef, animationIndex, onAnimationEnd, firstRender, forceAni
         }
         action.play();
         action.setLoop(THREE.LoopOnce);
+        action.clampWhenFinished = true;
     }
   },[forceAnimationUseStateTrigger]);
 

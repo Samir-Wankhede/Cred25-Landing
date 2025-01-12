@@ -30,11 +30,10 @@ export const Galaxy=({portal_pos, mesh_pos, light_pos, mesh_rotate=0})=> {
   return (
     <>
     <mesh>
-  <Plane scale={[2, 2.7, 0]} position={mesh_pos} rotation={[mesh_rotate,0,0]}>
-    <meshStandardMaterial color="#490363" />
-    
-  </Plane>
-</mesh>
+      <Plane scale={[2, 2.7, 0]} position={mesh_pos} rotation={[mesh_rotate,0,0]}>
+        <meshStandardMaterial color="#490363" emissive="#650590" emissiveIntensity={2} />
+      </Plane>
+    </mesh>
     <pointLight intensity={40} position={light_pos} color={"#ae1ee3"}/>
 
     <Points ref={particlesRef} limit={10000} position={portal_pos}>
