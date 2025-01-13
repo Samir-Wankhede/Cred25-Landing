@@ -19,7 +19,7 @@ const Loader = ({setLoaded}) => {
         />
 
         {/* Loader Content */}
-        <div className="z-10 flex flex-col items-center">
+        <div className="z-10 flex flex-col items-center md:-translate-y-0 -translate-y-[25%]">
           {/* Percentage */}
           <p className="text-6xl text-white mb-4 custom-shadow2">{Math.floor(progress)}%</p>
           {/* Loader GIF */}
