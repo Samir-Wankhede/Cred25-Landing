@@ -17,10 +17,6 @@ html,body {
   /* background-color: #181818; */
   font-family: "Avenixel", sans-serif;
   overflow: hidden;
-  background-image: url('./pixel-bg1.jpg'); /* Replace with your background image path */
-  background-size: cover; /* Ensure the image covers the entire viewport */
-  background-position: center; /* Center the background image */
-  background-repeat: no-repeat; /* Prevent the image from repeating */
   position: relative; /* Ensure the positioning of HTML content */
   top: 0;
   left: 0;
