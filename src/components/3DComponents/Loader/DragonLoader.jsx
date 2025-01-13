@@ -8,7 +8,7 @@ const DragonLoader = ({ loaded }) => {
       <div
         className="text-white w-screen h-full flex justify-start items-start ml-2 -translate-y-[48vh]"
       >
-        Wait for something more...
+        Something is coming...
       </div>
     </Html>
   );
