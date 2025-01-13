@@ -11,7 +11,7 @@ const LandingPageComponents = ({ setExplore3D, setMountDragon, mountDragon, expl
 
   const activeToggle = explore3D ? 'explore3D' : mountDragon ? 'dragonMount' : null;
   return (
-    <div className='w-screen h-screen flex flex-col items-center justify-between py-20 z-20'>
+    <div className='w-screen h-screen flex flex-col items-center justify-between py-20'>
       {/* <div className='flex-grow'></div> */}
       <div className={` items-center w-screen flex flex-col h-auto transition-all duration-1000 ${activeToggle ? 'scale-150 opacity-0' : 'scale-100 opacity-100'}`}>
         <div className='flex gap-1'>
