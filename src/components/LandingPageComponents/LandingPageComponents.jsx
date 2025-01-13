@@ -18,7 +18,7 @@ const LandingPageComponents = ({ setExplore3D, setMountDragon, mountDragon, expl
           <p className=' md:custom-shadow1 custom-shadow2 text-7xl md:text-9xl text-[#fff3d4]'> CREDENZ </p>
           <p className=' md:custom-shadow1 custom-shadow2 text-7xl md:text-9xl text-[#fff3d4]'> '25 </p>
         </div>
-        <p className='custom-shadow2 -mt-4 text-3xl md:text-4xl text-[#fff3d4]'> Coming Soon </p>
+        <p className='custom-shadow2 -mt-4 text-3xl md:text-5xl text-[#fff3d4]'> Coming Soon </p>
       </div>
       <div className="flex gap-5 space-x-4 mb-8 flex-grow items-end">
         <div className={` pointer-events-auto transition-all duration-1000 ${activeToggle && activeToggle !== 'explore3D' ? 'scale-150 opacity-0 invisible' : 'scale-100 opacity-100 visible'}`}>

@@ -90,8 +90,8 @@ const Dragon = ({ boneRef, animationIndex, onAnimationEnd, firstRender, forceAni
     <primitive
       ref={ref}
       object={scene}
-      scale={0.025}
-      position={[0, 1.2, 0]}
+      scale={0.05}
+      position={[0, 1.2, -0.68]}
       rotation={[0, -Math.PI / 4, 0]}
     />
   );

@@ -141,7 +141,7 @@ function Experience({ mountDragon, explore3D, setMountDragon, setLoaded, loaded 
       setMountDragon(false);
     }
     let curAnimation = Math.floor(Math.random() * 9);
-    // let curAnimation = 8;
+    // let curAnimation = 5;
     if(curAnimation===3 || curAnimation===9) curAnimation -= 1;
     setAnimationIndex(curAnimation);
     setForceAnimationUseStateTrigger(prev => !prev);
