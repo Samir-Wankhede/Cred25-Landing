@@ -4,17 +4,9 @@ const DragonLoader = ({ loaded }) => {
   if (loaded) return null;
 
   return (
-    <Html
-      style={{
-        pointerEvents: "none", // Ensure it doesn't block clicks
-      }}
-      transform={false} // Avoid unnecessary transformations
-    >
+    <Html center>
       <div
-        className="absolute top-0 left-0 text-white text-sm pl-4 pt-4"
-        style={{
-          pointerEvents: "none", // This ensures the text itself doesn't block
-        }}
+        className="text-white w-screen h-full flex justify-start items-start ml-2 -translate-y-[48vh]"
       >
         Loading Dragon...
       </div>
