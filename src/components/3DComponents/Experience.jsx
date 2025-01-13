@@ -127,7 +127,7 @@ function CameraController({originalPositionRef, startPositionRef, explore3D}){
   )
 }
 
-function Experience({ mountDragon, explore3D, setMountDragon, setLoaded }) {
+function Experience({ mountDragon, explore3D, setMountDragon }) {
   const boneRef = useRef();
   const firstRender = useRef(true);
   const originalPositionRef = useRef(new THREE.Vector3(-2.5, 0.15, 7)); // Store the original camera position
@@ -171,7 +171,7 @@ function Experience({ mountDragon, explore3D, setMountDragon, setLoaded }) {
             forceAnimationUseStateTrigger={forceAnimationUseStateTrigger}
         />
       </Suspense>
-      <Suspense fallback={<Loader setLoaded={setLoaded}/>}>
+      <Suspense fallback={<Loader/>}>
         <Portal />
       </Suspense>
       {
