@@ -43,7 +43,7 @@ const LandingPageComponents = ({ setExplore3D, setMountDragon, mountDragon, expl
                 }`}
               ></span>
             </label>
-            <label htmlFor="explore3D" className="cursor-pointer text-2xl text-white">Explore 3D</label>
+            <label htmlFor="explore3D" className="cursor-pointer text-2xl custom-shadow2">Explore 3D</label>
           </div>
         </div>
         {/* <div className={` pointer-events-auto transition-all duration-1000 ${activeToggle && activeToggle !== 'dragonMount' ? 'scale-150 opacity-0 invisible' : 'scale-100 opacity-100 visible'}`}>
