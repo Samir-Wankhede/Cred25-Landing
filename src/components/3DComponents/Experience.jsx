@@ -127,7 +127,7 @@ function CameraController({originalPositionRef, startPositionRef, explore3D}){
   )
 }
 
-function Experience({ mountDragon, explore3D, setMountDragon }) {
+function Experience({ mountDragon, explore3D, setMountDragon, setLoaded }) {
   const boneRef = useRef();
   const firstRender = useRef(true);
   const originalPositionRef = useRef(new THREE.Vector3(-2.5, 0.15, 7)); // Store the original camera position
@@ -139,8 +139,8 @@ function Experience({ mountDragon, explore3D, setMountDragon }) {
     if(animationIndex===2 && mountDragon) {
       setMountDragon(false);
     }
-    // let curAnimation = Math.floor(Math.random() * 9);
-    let curAnimation = 8;
+    let curAnimation = Math.floor(Math.random() * 9);
+    // let curAnimation = 8;
     if(curAnimation===3 || curAnimation===9) curAnimation -= 1;
     setAnimationIndex(curAnimation);
     setForceAnimationUseStateTrigger(prev => !prev);
@@ -171,7 +171,7 @@ function Experience({ mountDragon, explore3D, setMountDragon }) {
             forceAnimationUseStateTrigger={forceAnimationUseStateTrigger}
         />
       </Suspense>
-      <Suspense fallback={<Loader/>}>
+      <Suspense fallback={<Loader setLoaded={setLoaded}/>}>
         <Portal />
       </Suspense>
       {

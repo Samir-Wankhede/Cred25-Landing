@@ -1,7 +1,13 @@
 import { Html, useProgress } from "@react-three/drei";
+import { useEffect } from "react";
 
-const Loader = () => {
+const Loader = ({setLoaded}) => {
   const { progress } = useProgress();
+  useEffect(() => {
+    return () => {
+      setLoaded(true);
+    };
+  }, [setLoaded]);
   return (
     <Html center>
       <div className="h-screen w-screen flex flex-col justify-center items-center relative">
