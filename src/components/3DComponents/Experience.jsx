@@ -6,63 +6,63 @@ import gsap from 'gsap';
 import * as THREE from 'three';
 import Portal from './Portal/Portal';
 
-function DragonCameraController({ mountDragon, boneRef, setAnimationIndex, originalPositionRef, animationIndex }) {
-  const { camera } = useThree();
-  const isAnimationPlaying = useRef(false);
+// function DragonCameraController({ mountDragon, boneRef, setAnimationIndex, originalPositionRef, animationIndex }) {
+//   const { camera } = useThree();
+//   const isAnimationPlaying = useRef(false);
 
-  useEffect(() => {
-    if (mountDragon && boneRef.current) {
-      const bonePosition = boneRef.current.getWorldPosition(new THREE.Vector3());
-      const direction = new THREE.Vector3(0,-1,-1)
-        .subVectors(camera.position, bonePosition)
-        .normalize();
-      const targetPosition = bonePosition.clone().add(direction.multiplyScalar(0.5));
-      gsap.to(camera.position, {
-        x: -targetPosition.x,
-        y: targetPosition.y,
-        z: -targetPosition.z,
-        duration: 1,
-        onUpdate: () => {
-          camera.lookAt(bonePosition);
-        },
-        onComplete: () => {
-          if (animationIndex!==2) {
-            setAnimationIndex(2);
-            setForceAnimationUseStateTrigger(prev => !prev);
-            firstRender.current = false;
-          } 
-          isAnimationPlaying.current = true;
-        },
-      });
-    } else {
-      const originalPosition = originalPositionRef.current;
-      gsap.to(camera.position, {
-        x: originalPosition.x,
-        y: originalPosition.y,
-        z: originalPosition.z,
-        duration: 2,
-        onUpdate: () => {
-          camera.lookAt(new THREE.Vector3(0, 0, 0));
-        },
-      });
-    }
-  }, [mountDragon, boneRef, camera, originalPositionRef]);
-
-//   useFrame(() => {
-//     if (isAnimationPlaying.current) {
+//   useEffect(() => {
+//     if (mountDragon && boneRef.current) {
 //       const bonePosition = boneRef.current.getWorldPosition(new THREE.Vector3());
 //       const direction = new THREE.Vector3(0,-1,-1)
 //         .subVectors(camera.position, bonePosition)
 //         .normalize();
 //       const targetPosition = bonePosition.clone().add(direction.multiplyScalar(0.5));
-//       camera.lookAt(bonePosition);
-//       camera.current.object.position.copy(targetPosition);
-//       camera.current.update();
+//       gsap.to(camera.position, {
+//         x: -targetPosition.x,
+//         y: targetPosition.y,
+//         z: -targetPosition.z,
+//         duration: 1,
+//         onUpdate: () => {
+//           camera.lookAt(bonePosition);
+//         },
+//         onComplete: () => {
+//           if (animationIndex!==2) {
+//             setAnimationIndex(2);
+//             setForceAnimationUseStateTrigger(prev => !prev);
+//             firstRender.current = false;
+//           } 
+//           isAnimationPlaying.current = true;
+//         },
+//       });
+//     } else {
+//       const originalPosition = originalPositionRef.current;
+//       gsap.to(camera.position, {
+//         x: originalPosition.x,
+//         y: originalPosition.y,
+//         z: originalPosition.z,
+//         duration: 2,
+//         onUpdate: () => {
+//           camera.lookAt(new THREE.Vector3(0, 0, 0));
+//         },
+//       });
 //     }
-//   });
+//   }, [mountDragon, boneRef, camera, originalPositionRef]);
 
-  return <OrbitControls enableZoom={true}/>;
-}
+// //   useFrame(() => {
+// //     if (isAnimationPlaying.current) {
+// //       const bonePosition = boneRef.current.getWorldPosition(new THREE.Vector3());
+// //       const direction = new THREE.Vector3(0,-1,-1)
+// //         .subVectors(camera.position, bonePosition)
+// //         .normalize();
+// //       const targetPosition = bonePosition.clone().add(direction.multiplyScalar(0.5));
+// //       camera.lookAt(bonePosition);
+// //       camera.current.object.position.copy(targetPosition);
+// //       camera.current.update();
+// //     }
+// //   });
+
+//   return <OrbitControls enableZoom={true}/>;
+// }
 
 function CameraController({originalPositionRef, startPositionRef, explore3D}){
   const { camera } = useThree();
@@ -138,8 +138,8 @@ function Experience({ mountDragon, explore3D, setMountDragon }) {
     if(animationIndex===2 && mountDragon) {
       setMountDragon(false);
     }
-    // const curAnimation = Math.floor(Math.random() * 9);
-    const curAnimation = 0;
+    const curAnimation = Math.floor(Math.random() * 9);
+    // const curAnimation = 0;
     setAnimationIndex(curAnimation);
     setForceAnimationUseStateTrigger(prev => !prev);
     firstRender.current = false;
@@ -156,9 +156,10 @@ function Experience({ mountDragon, explore3D, setMountDragon }) {
     >
       <ambientLight intensity={1} />
       <spotLight position={[0, 0, 10]} angle={0.15} penumbra={1} />
-      <pointLight position={[10, 10, 10]} intensity={100} color={'orange'} />
-      <pointLight position={[10, 10, -10]} intensity={100} color={'orange'} />
-      <pointLight position={[-10, -10, -10]} intensity={100} color={'orange'} />
+      <pointLight position={[7, 8, 8]} intensity={200} color={'red'} />
+      <pointLight position={[0, 5, 2]} intensity={200} color={'#ff9c63'} />
+      <pointLight position={[-2, 7 -2]} intensity={200} color={'orange'} />
+      <pointLight position={[-3, -5, -5]} intensity={200} color={'orange'} />
       <Suspense fallback={null}>
         <Dragon 
             boneRef={boneRef} 
@@ -171,7 +172,7 @@ function Experience({ mountDragon, explore3D, setMountDragon }) {
       <Suspense fallback={null}>
         <Portal />
       </Suspense>
-      { !explore3D && mountDragon && 
+      {/* { !explore3D && mountDragon && 
         <DragonCameraController
           mountDragon={mountDragon}
           boneRef={boneRef}
@@ -179,7 +180,7 @@ function Experience({ mountDragon, explore3D, setMountDragon }) {
           originalPositionRef={originalPositionRef}
           animationIndex={animationIndex}
         />
-      }
+      } */}
       {
         !mountDragon &&
         <CameraController
