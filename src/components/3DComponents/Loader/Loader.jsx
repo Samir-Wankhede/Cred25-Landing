@@ -24,7 +24,7 @@ const Loader = ({setLoaded}) => {
           <p className="text-6xl text-white mb-4 custom-shadow2">{Math.floor(progress)}%</p>
           {/* Loader GIF */}
           <img
-            src="/loading-loader.gif"
+            src="/loading-loader.webp"
             alt="Loader"
             className="w-[25vh] h-[25vh]" /* Adjust size if necessary */
           />
