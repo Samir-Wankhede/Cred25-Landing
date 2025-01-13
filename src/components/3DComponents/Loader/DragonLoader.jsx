@@ -1,7 +1,7 @@
 import { Html } from "@react-three/drei";
 
 const DragonLoader = ({ loaded }) => {
-  if (loaded) return null;
+  if (!loaded) return null;
 
   return (
     <Html center>
