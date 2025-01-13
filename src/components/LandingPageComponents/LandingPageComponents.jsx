@@ -33,7 +33,7 @@ const LandingPageComponents = ({ setExplore3D, setMountDragon, mountDragon, expl
             />
             <label
               htmlFor="explore3D"
-              className={`w-12 h-6 bg-gray-400 rounded-full p-1 flex items-center cursor-pointer transition-colors duration-200 ease-in-out ${
+              className={`w-12 h-6 bg-gray-400/40 rounded-full p-1 flex items-center cursor-pointer transition-colors duration-200 ease-in-out ${
                 activeToggle === 'explore3D' ? 'bg-blue-600' : ''
               }`}
             >
@@ -58,7 +58,7 @@ const LandingPageComponents = ({ setExplore3D, setMountDragon, mountDragon, expl
             />
             <label
               htmlFor="dragonMount"
-              className={`w-12 h-6 bg-gray-400 rounded-full p-1 flex items-center cursor-pointer transition-colors duration-200 ease-in-out ${
+              className={`w-12 h-6 bg-gray-400/40 rounded-full p-1 flex items-center cursor-pointer transition-colors duration-200 ease-in-out ${
                 activeToggle === 'dragonMount' ? 'bg-blue-600' : ''
               }`}
             >

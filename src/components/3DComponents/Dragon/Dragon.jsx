@@ -21,6 +21,17 @@ const Dragon = ({ boneRef, animationIndex, onAnimationEnd, firstRender, forceAni
     }
   }, [scene, animations, animationIndex]);
 
+  useEffect(()=>{
+    function handleAnimationEnd() {
+     console.log('Animation finished');
+     onAnimationEnd();
+    }
+    if(mixer.current){
+        mixer.current.addEventListener('finished', handleAnimationEnd);
+    }
+    return () => mixer.current.removeEventListener('finished', handleAnimationEnd);
+  },[mixer.current])
+
   useEffect(() => {
     // Set up shadow casting and receiving
     scene.traverse((child) => {
@@ -50,20 +61,20 @@ const Dragon = ({ boneRef, animationIndex, onAnimationEnd, firstRender, forceAni
         mixer.current.stopAllAction();
         const action = mixer.current.clipAction(animations[animationIndex]);
         action.reset()
-        if(animationIndex==2 || animationIndex==2){
+        if(animationIndex===2){
             action.time = 30;
-        } else if(animationIndex==1){
+        } else if(animationIndex===1){
             action.time = 5;
-        } else if(animationIndex==9){
-            action.time = 70;
-        } else if(animationIndex==11){
+        } else if(animationIndex===4){
+            action.time = 72;
+        } else if(animationIndex===5){
             action.time = 80;
-        } else if(animationIndex==15){
-            action.time = 95;
-        } else if(animationIndex==18){
-            action.time = 112;
-        } else if(animationIndex==19){
-            action.time = 117.5;
+        } else if(animationIndex===6){
+            action.time = 98;
+        } else if(animationIndex===7){
+            action.time = 114;
+        } else if(animationIndex===8){
+            action.time = 118;
         }else {
             action.time = 0;
         }

@@ -138,8 +138,9 @@ function Experience({ mountDragon, explore3D, setMountDragon }) {
     if(animationIndex===2 && mountDragon) {
       setMountDragon(false);
     }
-    const curAnimation = Math.floor(Math.random() * 9);
-    // const curAnimation = 0;
+    let curAnimation = Math.floor(Math.random() * 9);
+    // let curAnimation = 8;
+    if(curAnimation===3) curAnimation -= 1;
     setAnimationIndex(curAnimation);
     setForceAnimationUseStateTrigger(prev => !prev);
     firstRender.current = false;
