@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import * as THREE from 'three';
 import Portal from './Portal/Portal';
 import Loader from './Loader/Loader';
+import DragonLoader from './Loader/DragonLoader';
 
 // function DragonCameraController({ mountDragon, boneRef, setAnimationIndex, originalPositionRef, animationIndex }) {
 //   const { camera } = useThree();
@@ -162,7 +163,7 @@ function Experience({ mountDragon, explore3D, setMountDragon, setLoaded }) {
       <pointLight position={[0, 5, 2]} intensity={200} color={'#ff9c63'} />
       <pointLight position={[-2, 7 -2]} intensity={200} color={'orange'} />
       <pointLight position={[-3, -5, -5]} intensity={200} color={'orange'} />
-      <Suspense fallback={null}>
+      <Suspense fallback={<DragonLoader/>}>
         <Dragon 
             boneRef={boneRef} 
             animationIndex={animationIndex} 
