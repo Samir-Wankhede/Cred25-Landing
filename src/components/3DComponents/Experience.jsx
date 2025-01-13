@@ -1,6 +1,6 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import Dragon from './dragon/dragon';
+import Dragon from './Dragon/Dragon';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import * as THREE from 'three';
