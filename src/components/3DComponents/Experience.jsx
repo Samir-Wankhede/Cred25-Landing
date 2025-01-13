@@ -139,13 +139,13 @@ function Experience({ mountDragon, explore3D, setMountDragon, setLoaded }) {
     if(animationIndex===2 && mountDragon) {
       setMountDragon(false);
     }
-    let curAnimation = Math.floor(Math.random() * 9);
-    // let curAnimation = 8;
-    if(curAnimation===3) curAnimation -= 1;
+    // let curAnimation = Math.floor(Math.random() * 9);
+    let curAnimation = 8;
+    if(curAnimation===3 || curAnimation===9) curAnimation -= 1;
     setAnimationIndex(curAnimation);
     setForceAnimationUseStateTrigger(prev => !prev);
     firstRender.current = false;
-    console.log("curAnimation",curAnimation);
+    // console.log("curAnimation",curAnimation);
   }
 
   return (
@@ -162,15 +162,17 @@ function Experience({ mountDragon, explore3D, setMountDragon, setLoaded }) {
       <pointLight position={[0, 5, 2]} intensity={200} color={'#ff9c63'} />
       <pointLight position={[-2, 7 -2]} intensity={200} color={'orange'} />
       <pointLight position={[-3, -5, -5]} intensity={200} color={'orange'} />
+      <Suspense fallback={null}>
+        <Dragon 
+            boneRef={boneRef} 
+            animationIndex={animationIndex} 
+            onAnimationEnd={onAnimationEnd}
+            firstRender={firstRender}
+            forceAnimationUseStateTrigger={forceAnimationUseStateTrigger}
+        />
+      </Suspense>
       <Suspense fallback={<Loader setLoaded={setLoaded}/>}>
         <Portal />
-        <Dragon 
-          boneRef={boneRef} 
-          animationIndex={animationIndex} 
-          onAnimationEnd={onAnimationEnd}
-          firstRender={firstRender}
-          forceAnimationUseStateTrigger={forceAnimationUseStateTrigger}
-        />
       </Suspense>
       {
         !mountDragon &&

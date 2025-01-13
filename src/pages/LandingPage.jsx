@@ -7,7 +7,7 @@ const LandingPage = () => {
   const [mountDragon, setMountDragon] = useState(false);
   const [loaded, setLoaded] = useState(false);
   useEffect(()=>{
-    console.log("explore3D",explore3D,"mountDragon",mountDragon);
+    // console.log("explore3D",explore3D,"mountDragon",mountDragon);
   },[explore3D,mountDragon])
   return (
     <div className="h-screen w-screen relative">
