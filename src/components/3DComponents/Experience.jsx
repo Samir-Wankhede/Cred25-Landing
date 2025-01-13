@@ -164,13 +164,15 @@ function Experience({ mountDragon, explore3D, setMountDragon, setLoaded, loaded 
       <pointLight position={[-2, 7 -2]} intensity={200} color={'orange'} />
       <pointLight position={[-3, -5, -5]} intensity={200} color={'orange'} />
       <Suspense fallback={<DragonLoader loaded={loaded}/>}>
-        <Dragon 
+        { loaded && 
+          <Dragon 
             boneRef={boneRef} 
             animationIndex={animationIndex} 
             onAnimationEnd={onAnimationEnd}
             firstRender={firstRender}
             forceAnimationUseStateTrigger={forceAnimationUseStateTrigger}
-        />
+          />
+        }
       </Suspense>
       <Suspense fallback={<Loader setLoaded={setLoaded}/>}>
         <Portal />
