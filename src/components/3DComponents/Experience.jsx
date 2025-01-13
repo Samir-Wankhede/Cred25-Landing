@@ -127,7 +127,7 @@ function CameraController({originalPositionRef, startPositionRef, explore3D}){
   )
 }
 
-function Experience({ mountDragon, explore3D, setMountDragon }) {
+function Experience({ mountDragon, explore3D, setMountDragon, setLoaded }) {
   const boneRef = useRef();
   const firstRender = useRef(true);
   const originalPositionRef = useRef(new THREE.Vector3(-2.5, 0.15, 7)); // Store the original camera position
@@ -162,27 +162,16 @@ function Experience({ mountDragon, explore3D, setMountDragon }) {
       <pointLight position={[0, 5, 2]} intensity={200} color={'#ff9c63'} />
       <pointLight position={[-2, 7 -2]} intensity={200} color={'orange'} />
       <pointLight position={[-3, -5, -5]} intensity={200} color={'orange'} />
-      <Suspense fallback={null}>
-        <Dragon 
-            boneRef={boneRef} 
-            animationIndex={animationIndex} 
-            onAnimationEnd={onAnimationEnd}
-            firstRender={firstRender}
-            forceAnimationUseStateTrigger={forceAnimationUseStateTrigger}
-        />
-      </Suspense>
-      <Suspense fallback={<Loader/>}>
+      <Suspense fallback={<Loader setLoaded={setLoaded}/>}>
         <Portal />
-      </Suspense>
-      {/* { !explore3D && mountDragon && 
-        <DragonCameraController
-          mountDragon={mountDragon}
-          boneRef={boneRef}
-          setAnimationIndex={setAnimationIndex}
-          originalPositionRef={originalPositionRef}
-          animationIndex={animationIndex}
+        <Dragon 
+          boneRef={boneRef} 
+          animationIndex={animationIndex} 
+          onAnimationEnd={onAnimationEnd}
+          firstRender={firstRender}
+          forceAnimationUseStateTrigger={forceAnimationUseStateTrigger}
         />
-      } */}
+      </Suspense>
       {
         !mountDragon &&
         <CameraController
@@ -191,7 +180,6 @@ function Experience({ mountDragon, explore3D, setMountDragon }) {
           explore3D={explore3D}
         />
       }
-      {/* <axesHelper args={[5]} /> */}
     </Canvas>
   );
 }
