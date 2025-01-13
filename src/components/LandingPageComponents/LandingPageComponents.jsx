@@ -22,7 +22,7 @@ const LandingPageComponents = ({ setExplore3D, setMountDragon, mountDragon, expl
       </div>
       <div className="flex gap-5 space-x-4 mb-8 flex-grow items-end">
         <div className={` pointer-events-auto transition-all duration-1000 ${activeToggle && activeToggle !== 'explore3D' ? 'scale-150 opacity-0 invisible' : 'scale-100 opacity-100 visible'}`}>
-          <div className="flex flex-col justify-center items-center space-x-2">
+          <div className="flex flex-col justify-center items-center space-x-2 opacity-0">
             <input
               type="checkbox"
               id="explore3D"
@@ -43,7 +43,7 @@ const LandingPageComponents = ({ setExplore3D, setMountDragon, mountDragon, expl
                 }`}
               ></span>
             </label>
-            <label htmlFor="explore3D" className="cursor-pointer text-2xl text-white">Explore 3D</label>
+            <label htmlFor="explore3D" className="cursor-pointer text-2xl text-white opacity-0">Explore 3D</label>
           </div>
         </div>
         {/* <div className={` pointer-events-auto transition-all duration-1000 ${activeToggle && activeToggle !== 'dragonMount' ? 'scale-150 opacity-0 invisible' : 'scale-100 opacity-100 visible'}`}>
