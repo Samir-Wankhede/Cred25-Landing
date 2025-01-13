@@ -11,7 +11,7 @@ const LandingPage = () => {
   },[explore3D,mountDragon])
   return (
     <div className="h-screen w-screen relative">
-      <Experience mountDragon={mountDragon} setMountDragon={setMountDragon} explore3D={explore3D} setLoaded={setLoaded} />
+      <Experience mountDragon={mountDragon} setMountDragon={setMountDragon} explore3D={explore3D} setLoaded={setLoaded} loaded={loaded} />
       <div className="absolute inset-0 z-10 pointer-events-none">
         {loaded && <LandingPageComponents setExplore3D={setExplore3D} setMountDragon={setMountDragon} explore3D={explore3D} mountDragon={mountDragon} />}
       </div>

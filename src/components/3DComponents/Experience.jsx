@@ -128,7 +128,7 @@ function CameraController({originalPositionRef, startPositionRef, explore3D}){
   )
 }
 
-function Experience({ mountDragon, explore3D, setMountDragon, setLoaded }) {
+function Experience({ mountDragon, explore3D, setMountDragon, setLoaded, loaded }) {
   const boneRef = useRef();
   const firstRender = useRef(true);
   const originalPositionRef = useRef(new THREE.Vector3(-2.5, 0.15, 7)); // Store the original camera position
@@ -163,7 +163,7 @@ function Experience({ mountDragon, explore3D, setMountDragon, setLoaded }) {
       <pointLight position={[0, 5, 2]} intensity={200} color={'#ff9c63'} />
       <pointLight position={[-2, 7 -2]} intensity={200} color={'orange'} />
       <pointLight position={[-3, -5, -5]} intensity={200} color={'orange'} />
-      <Suspense fallback={<DragonLoader/>}>
+      <Suspense fallback={<DragonLoader loaded={loaded}/>}>
         <Dragon 
             boneRef={boneRef} 
             animationIndex={animationIndex} 
