@@ -5,6 +5,7 @@ import { Suspense, useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import * as THREE from 'three';
 import Portal from './Portal/Portal';
+import Loader from './Loader/Loader';
 
 // function DragonCameraController({ mountDragon, boneRef, setAnimationIndex, originalPositionRef, animationIndex }) {
 //   const { camera } = useThree();
@@ -170,7 +171,7 @@ function Experience({ mountDragon, explore3D, setMountDragon }) {
             forceAnimationUseStateTrigger={forceAnimationUseStateTrigger}
         />
       </Suspense>
-      <Suspense fallback={null}>
+      <Suspense fallback={<Loader/>}>
         <Portal />
       </Suspense>
       {/* { !explore3D && mountDragon && 
