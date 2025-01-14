@@ -1,11 +1,12 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import Dragon from './dragon/dragon';
+import Dragon from './Dragon/Dragon';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import * as THREE from 'three';
 import Portal from './Portal/Portal';
 import Loader from './Loader/Loader';
+import DragonLoader from './Loader/DragonLoader';
 
 // function DragonCameraController({ mountDragon, boneRef, setAnimationIndex, originalPositionRef, animationIndex }) {
 //   const { camera } = useThree();
@@ -127,7 +128,7 @@ function CameraController({originalPositionRef, startPositionRef, explore3D}){
   )
 }
 
-function Experience({ mountDragon, explore3D, setMountDragon }) {
+function Experience({ mountDragon, explore3D, setMountDragon, setLoaded, loaded }) {
   const boneRef = useRef();
   const firstRender = useRef(true);
   const originalPositionRef = useRef(new THREE.Vector3(-2.5, 0.15, 7)); // Store the original camera position
@@ -140,12 +141,12 @@ function Experience({ mountDragon, explore3D, setMountDragon }) {
       setMountDragon(false);
     }
     let curAnimation = Math.floor(Math.random() * 9);
-    // let curAnimation = 8;
-    if(curAnimation===3) curAnimation -= 1;
+    // let curAnimation = 4;
+    if(curAnimation===3 || curAnimation===9) curAnimation -= 1;
     setAnimationIndex(curAnimation);
     setForceAnimationUseStateTrigger(prev => !prev);
     firstRender.current = false;
-    console.log("curAnimation",curAnimation);
+    // console.log("curAnimation",curAnimation);
   }
 
   return (
@@ -162,27 +163,20 @@ function Experience({ mountDragon, explore3D, setMountDragon }) {
       <pointLight position={[0, 5, 2]} intensity={200} color={'#ff9c63'} />
       <pointLight position={[-2, 7 -2]} intensity={200} color={'orange'} />
       <pointLight position={[-3, -5, -5]} intensity={200} color={'orange'} />
-      <Suspense fallback={null}>
-        <Dragon 
+      <Suspense fallback={<DragonLoader loaded={loaded}/>}>
+        { loaded && 
+          <Dragon 
             boneRef={boneRef} 
             animationIndex={animationIndex} 
             onAnimationEnd={onAnimationEnd}
             firstRender={firstRender}
             forceAnimationUseStateTrigger={forceAnimationUseStateTrigger}
-        />
+          />
+        }
       </Suspense>
-      <Suspense fallback={<Loader/>}>
+      <Suspense fallback={<Loader setLoaded={setLoaded}/>}>
         <Portal />
       </Suspense>
-      {/* { !explore3D && mountDragon && 
-        <DragonCameraController
-          mountDragon={mountDragon}
-          boneRef={boneRef}
-          setAnimationIndex={setAnimationIndex}
-          originalPositionRef={originalPositionRef}
-          animationIndex={animationIndex}
-        />
-      } */}
       {
         !mountDragon &&
         <CameraController
@@ -191,7 +185,6 @@ function Experience({ mountDragon, explore3D, setMountDragon }) {
           explore3D={explore3D}
         />
       }
-      {/* <axesHelper args={[5]} /> */}
     </Canvas>
   );
 }

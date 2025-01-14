@@ -5,7 +5,7 @@ import * as THREE from 'three';
 
 const Dragon = ({ boneRef, animationIndex, onAnimationEnd, firstRender, forceAnimationUseStateTrigger }) => {
   const { scene, animations } = useGLTF('/Dragon.glb');
-  console.log  (animations); // Log the animations array to see available animations
+  // console.log  (animations); // Log the animations array to see available animations
   const ref = useRef();
   const mixer = useRef();
 
@@ -23,7 +23,7 @@ const Dragon = ({ boneRef, animationIndex, onAnimationEnd, firstRender, forceAni
 
   useEffect(()=>{
     function handleAnimationEnd() {
-     console.log('Animation finished');
+    // console.log('Animation finished');
      onAnimationEnd();
     }
     if(mixer.current){
@@ -68,7 +68,7 @@ const Dragon = ({ boneRef, animationIndex, onAnimationEnd, firstRender, forceAni
         } else if(animationIndex===4){
             action.time = 72;
         } else if(animationIndex===5){
-            action.time = 80;
+            action.time = 81;
         } else if(animationIndex===6){
             action.time = 98;
         } else if(animationIndex===7){
@@ -90,8 +90,8 @@ const Dragon = ({ boneRef, animationIndex, onAnimationEnd, firstRender, forceAni
     <primitive
       ref={ref}
       object={scene}
-      scale={0.025}
-      position={[0, 1.2, 0]}
+      scale={0.05}
+      position={[0, 1.2, -0.68]}
       rotation={[0, -Math.PI / 4, 0]}
     />
   );
