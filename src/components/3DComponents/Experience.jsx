@@ -20,13 +20,13 @@ function DragonCameraController({
 
   useEffect(() => {
     // Precompute the -Math.PI / 4 rotation quaternion for the Y-axis
-    const yRotation = new THREE.Quaternion();
-    yRotation.setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI / 3);
-    rotationQuaternion.current.copy(yRotation);
+    const Rotation = new THREE.Quaternion();
+    Rotation.setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI / 3);
+    rotationQuaternion.current.copy(Rotation);
   }, []);
 
   const calculateIdealOffset = () => {
-    const idealOffset = new THREE.Vector3(-0.60, -1, -0.5);
+    const idealOffset = new THREE.Vector3(-1, -1.75, -1.75);
     const boneRotation = boneRef.current.getWorldQuaternion(new THREE.Quaternion());
 
     // Apply the -Math.PI / 4 rotation to the bone rotation
@@ -51,15 +51,21 @@ function DragonCameraController({
     return idealLookAt;
   };
 
+  const currentPosition = new THREE.Vector3();
+  const currentLookAt= new THREE.Vector3();
+  const t = 0.15;
+
   useFrame(() => {
     if (mountDragon) {
-      camera.lookAt(calculateIdealLookAt());
-      camera.position.copy(calculateIdealOffset());
+      currentLookAt.lerp(calculateIdealLookAt(), t);
+      currentPosition.lerp(calculateIdealOffset(), t);
+      camera.lookAt(currentLookAt);
+      camera.position.copy(currentPosition);
       camera.updateProjectionMatrix();
     }
   });
 
-  return <OrbitControls enableRotate={true} enableZoom={true} />;
+  return <OrbitControls enableRotate={false} enableZoom={false} enablePan={false} />;
 }
 
 function CameraController({originalPositionRef, startPositionRef, explore3D}){
@@ -133,8 +139,10 @@ function Experience({ mountDragon, explore3D, setMountDragon, setLoaded, loaded 
   const [forceAnimationUseStateTrigger, setForceAnimationUseStateTrigger] = useState(false);
 
   const onAnimationEnd = () => {
+    // console.log(animationIndex, mountDragon);
     if(animationIndex===2 && mountDragon) {
       setMountDragon(false);
+      // console.log("stop 2")
     }
     // let curAnimation = Math.floor(Math.random() * 9);
     let curAnimation = 2;
