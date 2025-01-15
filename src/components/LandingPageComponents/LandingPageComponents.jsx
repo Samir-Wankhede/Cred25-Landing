@@ -71,7 +71,7 @@ const LandingPageComponents = ({ setExplore3D, setMountDragon, mountDragon, expl
               ></span>
             </label>
             <label htmlFor="explore3D" className="cursor-pointer text-2xl text-white">
-              Explore 3D
+              Explore
             </label>
           </div>
         </div>
