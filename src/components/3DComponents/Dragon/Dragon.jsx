@@ -50,7 +50,8 @@ const Dragon = ({ boneRef, animationIndex, onAnimationEnd, firstRender, forceAni
       }
 
       // Store a reference to a specific bone
-      if (child.isBone && child.name === 'Bip001-Neck_08') {
+      // if(child.isBone) console.log(child);
+      if (child.isBone && child.name === 'Bip001-Spine1') {
         boneRef.current = child;
       }
     });
