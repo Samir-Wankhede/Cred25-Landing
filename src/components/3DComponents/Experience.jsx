@@ -141,7 +141,7 @@ function Experience({ mountDragon, explore3D, setMountDragon, setLoaded, loaded,
   const [forceAnimationUseStateTrigger, setForceAnimationUseStateTrigger] = useState(false);
 
   const onAnimationEnd = () => {
-    if(animationIndex===2 && mountDragon){
+    if(animationIndex===2){
       setMountDragon(false);
     }
     let curAnimation = Math.floor(Math.random() * 9);
