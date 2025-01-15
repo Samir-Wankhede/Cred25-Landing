@@ -7,6 +7,7 @@ import * as THREE from 'three';
 import Portal from './Portal/Portal';
 import Loader from './Loader/Loader';
 import DragonLoader from './Loader/DragonLoader';
+import Nether from './Nether/Nether';
 
 function DragonCameraController({
   mountDragon,
@@ -179,6 +180,7 @@ function Experience({ mountDragon, explore3D, setMountDragon, setLoaded, loaded,
       </Suspense>
       <Suspense fallback={<Loader setLoaded={setLoaded}/>}>
         <Portal />
+        <Nether />
       </Suspense>
       {
         !mountDragon ?
