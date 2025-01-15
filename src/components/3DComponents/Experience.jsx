@@ -55,6 +55,7 @@ function DragonCameraController({
 
   useFrame(() => {
     if (mountDragon) {
+      console.log(boneRef.current.getWorldPosition(new THREE.Vector3()));
       currentLookAt.lerp(calculateIdealLookAt(), t);
       currentPosition.lerp(calculateIdealOffset(), t);
       camera.lookAt(currentLookAt);
@@ -157,16 +158,19 @@ function Experience({ mountDragon, explore3D, setMountDragon, setLoaded, loaded,
     <Canvas className="bg-black"
       camera={{ position: startPositionRef.current, near: 0.01 } }
       onCreated={({ scene }) => {
-        scene.fog = new THREE.Fog('black', 0.5, 50) 
+        scene.fog = new THREE.Fog('black', 1, 50) 
       }}
 
     >
       <ambientLight intensity={1} />
       <spotLight position={[0, 0, 10]} angle={0.15} penumbra={1} />
       <pointLight position={[7, 8, 8]} intensity={200} color={'red'} />
-      <pointLight position={[0, 5, 2]} intensity={200} color={'#ff9c63'} />
+      <pointLight position={[0, 7, 2]} intensity={200} color={'#ff9c63'} />
+      <pointLight position={[12, 12, -22]} intensity={150} color={'#ff9c63'} />
       <pointLight position={[-2, 7 -2]} intensity={200} color={'orange'} />
       <pointLight position={[-3, -5, -5]} intensity={200} color={'orange'} />
+      <pointLight position={[13, 11, -8]} intensity={200} color={'orange'} />
+      <pointLight position={[-13, 10, -15]} intensity={100} color={'red'} />
       <Suspense fallback={<DragonLoader setDragonLoaded={setDragonLoaded} loaded={loaded}/>}>
         { loaded && 
           <Dragon 

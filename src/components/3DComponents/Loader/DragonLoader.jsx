@@ -2,7 +2,6 @@ import { Html } from "@react-three/drei";
 import { useEffect } from "react";
 
 const DragonLoader = ({ loaded, setDragonLoaded }) => {
-  if (!loaded) return null;
 
   useEffect(() => {
     return () => {
@@ -15,7 +14,7 @@ const DragonLoader = ({ loaded, setDragonLoaded }) => {
       <div
         className="text-white w-screen h-full flex justify-start items-start ml-2 -translate-y-[48vh]"
       >
-        Unleashing the beast...
+        {loaded && "Unleashing the beast..."}
       </div>
     </Html>
   );
