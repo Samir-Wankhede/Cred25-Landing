@@ -1,27 +1,54 @@
-import React from 'react'
-import { useState } from 'react';
-const LandingPageComponents = ({ setExplore3D, setMountDragon, mountDragon, explore3D }) => {
-  const handleToggleChange = (toggle) => {  
+import React, { useEffect } from 'react';
+
+const LandingPageComponents = ({ setExplore3D, setMountDragon, mountDragon, explore3D, dragonLoaded }) => {
+  const handleToggleChange = (toggle) => {
     if (toggle === 'explore3D') {
       setExplore3D(activeToggle !== toggle);
     } else if (toggle === 'dragonMount') {
       setMountDragon(activeToggle !== toggle);
     }
-  }
+  };
 
-  const activeToggle = explore3D ? 'explore3D' : mountDragon ? 'dragonMount' : null;
+  const activeToggle =
+    explore3D || mountDragon ? (explore3D ? 'explore3D' : mountDragon ? 'dragonMount' : null) : null;
+
+  // Synchronize internal state with parent state
+  useEffect(() => {
+    if (!explore3D && activeToggle === 'explore3D') {
+      setExplore3D(false);
+    }
+    if (!mountDragon && activeToggle === 'dragonMount') {
+      setMountDragon(false);
+    }
+  }, [explore3D, mountDragon, setExplore3D, setMountDragon, activeToggle]);
+
   return (
-    <div className='w-screen h-screen flex flex-col items-center justify-between py-20'>
-      {/* <div className='flex-grow'></div> */}
-      <div className={` items-center w-screen flex flex-col h-auto transition-all duration-1000 ${activeToggle ? 'scale-150 opacity-0' : 'scale-100 opacity-100'}`}>
-        <div className='flex gap-1'>
-          <p className=' md:custom-shadow1 custom-shadow2 text-7xl md:text-9xl text-[#fff3d4]'> CREDENZ </p>
-          <p className=' md:custom-shadow1 custom-shadow2 text-7xl md:text-9xl text-[#fff3d4]'> '25 </p>
+    <div className="w-screen h-screen flex flex-col items-center justify-between py-20">
+      <div
+        className={`items-center w-screen flex flex-col h-auto transition-all duration-1000 ${
+          activeToggle ? 'scale-150 opacity-0' : 'scale-100 opacity-100'
+        }`}
+      >
+        <div className="flex gap-1">
+          <p className="md:custom-shadow1 custom-shadow2 text-7xl md:text-9xl text-[#fff3d4]">
+            CREDENZ
+          </p>
+          <p className="md:custom-shadow1 custom-shadow2 text-7xl md:text-9xl text-[#fff3d4]">
+            '25
+          </p>
         </div>
-        <p className='custom-shadow2 -mt-4 text-3xl md:text-5xl text-[#fff3d4]'> ********* ****** </p>
+        <p className="custom-shadow2 -mt-4 text-3xl md:text-5xl text-[#fff3d4]">
+          ********* ******
+        </p>
       </div>
       <div className="flex gap-5 space-x-4 mb-8 flex-grow items-end">
-        <div className={` pointer-events-auto transition-all duration-1000 ${activeToggle && activeToggle !== 'explore3D' ? 'scale-150 opacity-0 invisible' : 'scale-100 opacity-100 visible'}`}>
+        <div
+          className={`pointer-events-auto transition-all duration-1000 ${
+            activeToggle && activeToggle !== 'explore3D'
+              ? 'scale-150 opacity-0 invisible'
+              : 'scale-100 opacity-100 visible'
+          }`}
+        >
           <div className="flex flex-col justify-center items-center space-x-2">
             <input
               type="checkbox"
@@ -43,10 +70,18 @@ const LandingPageComponents = ({ setExplore3D, setMountDragon, mountDragon, expl
                 }`}
               ></span>
             </label>
-            <label htmlFor="explore3D" className="cursor-pointer text-2xl text-white">Explore 3D</label>
+            <label htmlFor="explore3D" className="cursor-pointer text-2xl text-white">
+              Explore 3D
+            </label>
           </div>
         </div>
-        <div className={` pointer-events-auto transition-all duration-1000 ${activeToggle && activeToggle !== 'dragonMount' ? 'scale-150 opacity-0 invisible' : 'scale-100 opacity-100 visible'}`}>
+        <div
+          className={`pointer-events-auto transition-all duration-1000 ${
+            activeToggle && activeToggle !== 'dragonMount'
+              ? 'scale-150 opacity-0 invisible'
+              : 'scale-100 opacity-100 visible'
+          }`}
+        >
           <div className="flex flex-col justify-center items-center space-x-2">
             <input
               type="checkbox"
@@ -54,7 +89,7 @@ const LandingPageComponents = ({ setExplore3D, setMountDragon, mountDragon, expl
               checked={activeToggle === 'dragonMount'}
               onChange={() => handleToggleChange('dragonMount')}
               className="sr-only"
-              disabled={activeToggle === 'explore3D'}
+              disabled={activeToggle === 'explore3D' || !dragonLoaded}
             />
             <label
               htmlFor="dragonMount"
@@ -68,12 +103,14 @@ const LandingPageComponents = ({ setExplore3D, setMountDragon, mountDragon, expl
                 }`}
               ></span>
             </label>
-            <label htmlFor="dragonMount" className="cursor-pointer text-2xl text-white">Dragon Mount</label>
+            <label htmlFor="dragonMount" className="cursor-pointer text-2xl text-white">
+              {dragonLoaded ? "Ascend" : "wait..."}
+            </label>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default LandingPageComponents;

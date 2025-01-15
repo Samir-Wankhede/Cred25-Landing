@@ -1,7 +1,14 @@
 import { Html } from "@react-three/drei";
+import { useEffect } from "react";
 
-const DragonLoader = ({ loaded }) => {
+const DragonLoader = ({ loaded, setDragonLoaded }) => {
   if (!loaded) return null;
+
+  useEffect(() => {
+    return () => {
+      setDragonLoaded(true);
+    };
+  }, [setDragonLoaded]);
 
   return (
     <Html center>
