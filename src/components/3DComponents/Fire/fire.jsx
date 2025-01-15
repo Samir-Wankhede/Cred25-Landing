@@ -34,9 +34,9 @@ const generateFlareTexture = () => {
 
 const FireParticles = ({
   position = [0, -1.5, 0],
-  planeWidth = 25,
-  planeHeight = 25,
-  particleCount = 250,
+  planeWidth = 50,
+  planeHeight = 50,
+  particleCount = 500,
   particleSize = 0.25,
   height = 20,
   speed = 0.12,
