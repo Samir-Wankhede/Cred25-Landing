@@ -38,7 +38,7 @@ const LandingPageComponents = ({ setExplore3D, setMountDragon, mountDragon, expl
           </p>
         </div>
         <p className="custom-shadow2 -mt-4 text-3xl md:text-5xl text-[#fff3d4]">
-          ********* ******
+          Coming Soon
         </p>
       </div>
       <div className="flex gap-5 space-x-4 mb-8 flex-grow items-end">
