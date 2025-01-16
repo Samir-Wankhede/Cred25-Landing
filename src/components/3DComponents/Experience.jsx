@@ -124,12 +124,13 @@ function CameraController({originalPositionRef, startPositionRef, explore3D}){
   return ( 
     <OrbitControls 
       enableRotate={explore3D? true : false} 
-      enablePan={false} 
+      enablePan={true} 
+      // enablePan={false} 
       enableZoom={explore3D ? true : false} 
-      minDistance={5} 
-      maxDistance={10} 
-      maxPolarAngle={Math.PI / 1.8}
-      minPolarAngle={Math.PI / 4}
+      // minDistance={5} 
+      // maxDistance={10} 
+      // maxPolarAngle={Math.PI / 1.8}
+      // minPolarAngle={Math.PI / 4}
     />
   )
 }
