@@ -55,7 +55,7 @@ function DragonCameraController({
 
   useFrame(() => {
     if (mountDragon) {
-      console.log(boneRef.current.getWorldPosition(new THREE.Vector3()));
+      // console.log(boneRef.current.getWorldPosition(new THREE.Vector3()));
       currentLookAt.lerp(calculateIdealLookAt(), t);
       currentPosition.lerp(calculateIdealOffset(), t);
       camera.lookAt(currentLookAt);
@@ -158,7 +158,7 @@ function Experience({ mountDragon, explore3D, setMountDragon, setLoaded, loaded,
     <Canvas className="bg-black"
       camera={{ position: startPositionRef.current, near: 0.01 } }
       onCreated={({ scene }) => {
-        scene.fog = new THREE.Fog('black', 1, 45) 
+        scene.fog = new THREE.Fog('black', 1, 43) 
       }}
 
     >

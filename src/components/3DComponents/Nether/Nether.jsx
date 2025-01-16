@@ -2,7 +2,7 @@ import { useGLTF } from '@react-three/drei';
 import React, { useEffect } from 'react'
 
 const Nether = () => {
-  const { scene } = useGLTF('/Nether2.glb');
+  const { scene } = useGLTF('/Nether3.glb');
   useEffect(()=>{
     scene.traverse((child)=>{
       child.frustumCulled = false;
@@ -14,7 +14,7 @@ const Nether = () => {
     })
   },[scene])
   return (
-    <primitive object={scene} scale={30} rotation={[0,0,0]} position={[0.75,-2.68, -3]} />
+    <primitive object={scene} scale={0.3} rotation={[0,-Math.PI/4,0]} position={[0.75,-2.68, 0]} />
   )
 }
 
