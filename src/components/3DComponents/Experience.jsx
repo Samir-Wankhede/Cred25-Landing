@@ -55,7 +55,7 @@ function DragonCameraController({
 
   useFrame(() => {
     if (mountDragon) {
-      console.log(boneRef.current.getWorldPosition(new THREE.Vector3()));
+      // console.log(boneRef.current.getWorldPosition(new THREE.Vector3()));
       currentLookAt.lerp(calculateIdealLookAt(), t);
       currentPosition.lerp(calculateIdealOffset(), t);
       camera.lookAt(currentLookAt);
