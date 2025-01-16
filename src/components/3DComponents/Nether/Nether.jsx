@@ -14,7 +14,7 @@ const Nether = () => {
     })
   },[scene])
   return (
-    <primitive object={scene} scale={30} rotation={[0,0,0]} position={[0.75,-2.68,-1]} />
+    <primitive object={scene} scale={30} rotation={[0,0,0]} position={[0.75,-2.68, -3]} />
   )
 }
 
