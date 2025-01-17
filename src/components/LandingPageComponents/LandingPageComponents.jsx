@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const LandingPageComponents = ({ setExplore3D, setMountDragon, mountDragon, explore3D, dragonLoaded }) => {
+const LandingPageComponents = ({ setExplore3D, setMountDragon, mountDragon, explore3D, dragonLoaded , checkPortal}) => {
   const handleToggleChange = (toggle) => {
     if (toggle === 'explore3D') {
       setExplore3D(activeToggle !== toggle);
@@ -41,7 +41,7 @@ const LandingPageComponents = ({ setExplore3D, setMountDragon, mountDragon, expl
           Coming Soon
         </p>
       </div>
-      <div className="flex gap-5 space-x-4 mb-8 flex-grow items-end">
+      {!checkPortal && <div className="flex gap-5 space-x-4 mb-8 flex-grow items-end">
         <div
           className={`pointer-events-auto transition-all duration-1000 ${
             activeToggle && activeToggle !== 'explore3D'
@@ -108,7 +108,7 @@ const LandingPageComponents = ({ setExplore3D, setMountDragon, mountDragon, expl
             </label>
           </div>
         </div>
-      </div>
+      </div>}
     </div>
   );
 };

@@ -8,6 +8,7 @@ import Portal from './Portal/Portal';
 import Loader from './Loader/Loader';
 import DragonLoader from './Loader/DragonLoader';
 import Nether from './Nether/Nether';
+import { useNavigate } from 'react-router-dom';
 
 function DragonCameraController({
   mountDragon,
@@ -72,6 +73,66 @@ function DragonCameraController({
   return <OrbitControls enableRotate={false} enableZoom={false} enablePan={false} />;
 }
 
+function PortalController({checkPortal}){
+  const {camera} = useThree();
+  let controlsRef = null; 
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (checkPortal) {
+      console.log("Portal clicked");
+
+      const targetPosition = { x: 0, y: -0.8, z: 2 };
+      const targetFov = 35;
+
+      // Disable OrbitControls during animation
+      if (controlsRef) {
+        controlsRef.enabled = false;
+      }
+
+      // Animate camera position to zoom
+      gsap.to(camera.position, {
+        x: targetPosition.x,
+        y: targetPosition.y,
+        z: targetPosition.z,
+        duration: 1.5,
+        ease: 'power2.out',
+        onUpdate: () => {
+          camera.lookAt(0, -0.8, 0);
+        },
+      });
+
+      // Animate camera FOV
+      gsap.to(camera, {
+        fov: targetFov,
+        duration: 1.5,
+        ease: 'power2.out',
+        onUpdate: () => {
+          camera.updateProjectionMatrix();
+        },
+        onComplete: () => {
+          gsap.to(camera, {
+            rotate: (0,0,Math.PI * 10), // Rotate 10 full spins
+            duration: 2, // Duration of the spin
+            ease: 'power2.inOut',
+            onComplete: () => {
+              navigate('/events'); // Replace with your desired route
+            },
+          });
+        },
+      });
+    }
+  }, [checkPortal, camera, navigate]);
+
+  return (
+    <OrbitControls
+      ref={(ref) => (controlsRef = ref)}
+      enableRotate={true} // Allow manual control by default
+      enableZoom={false}
+      enablePan={false}
+    />)
+}
+
 function CameraController({originalPositionRef, startPositionRef, explore3D}){
   const { camera } = useThree();
   const firstAnimation = useRef(false);
@@ -134,7 +195,7 @@ function CameraController({originalPositionRef, startPositionRef, explore3D}){
   )
 }
 
-function Experience({ mountDragon, explore3D, setMountDragon, setLoaded, loaded, setDragonLoaded }) {
+function Experience({ mountDragon, explore3D, setMountDragon, setLoaded, loaded, setDragonLoaded,checkPortal, setCheckPortal}) {
   const boneRef = useRef();
   const firstRender = useRef(true);
   const originalPositionRef = useRef(new THREE.Vector3(-2.5, 0.15, 7)); // Store the original camera position
@@ -181,11 +242,12 @@ function Experience({ mountDragon, explore3D, setMountDragon, setLoaded, loaded,
         />
       </Suspense>
       <Suspense fallback={<Loader setLoaded={setLoaded}/>}>
-        <Portal />
+        <Portal onClick={()=>setCheckPortal(true)}/>
         <Nether />
       </Suspense>
+      <PortalController checkPortal={checkPortal}/>
       {
-        !mountDragon ?
+        !mountDragon && !checkPortal?
         <CameraController
           originalPositionRef={originalPositionRef}
           startPositionRef={startPositionRef}

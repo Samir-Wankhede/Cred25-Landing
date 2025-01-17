@@ -7,6 +7,7 @@ const LandingPage = () => {
   const [mountDragon, setMountDragon] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [dragonLoaded, setDragonLoaded] = useState(false);
+  const [checkPortal, setCheckPortal] = useState(false)
   useEffect(()=>{
     // console.log("explore3D",explore3D,"mountDragon",mountDragon);
   },[explore3D,mountDragon])
@@ -19,9 +20,11 @@ const LandingPage = () => {
         setLoaded={setLoaded} 
         loaded={loaded} 
         setDragonLoaded={setDragonLoaded}
+        checkPortal={checkPortal}
+        setCheckPortal={setCheckPortal}
       />
       <div className="absolute inset-0 z-10 pointer-events-none">
-        {loaded && <LandingPageComponents setExplore3D={setExplore3D} setMountDragon={setMountDragon} explore3D={explore3D} mountDragon={mountDragon} dragonLoaded={dragonLoaded} />}
+        {loaded && <LandingPageComponents setExplore3D={setExplore3D} setMountDragon={setMountDragon} explore3D={explore3D} mountDragon={mountDragon} dragonLoaded={dragonLoaded} checkPortal={checkPortal} />}
       </div>
     </div>
   );
